@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Mater and Margarita",
+    "isbn": "0679760806",
+    "author": "Mikhail Bulgakov",
+    "publishing-year": "1967",
+    "publisher": "Vintage International",
+    "genre": "classics",
+    "description": "One hot spring, the devil arrives in Moscow, accompanied by a retinue that includes a beautiful naked witch and an immense talking black cat with a fondness for chess and vodka. The visitors quickly wreak havoc in a city that refuses to believe in either God or Satan.",
+    "score": "4.57",
+    "review": "One of the best books I've ever read",
+    "availability": "available",
+    "loan period": "2 weeks",
+    "library": "Stockholms Stadsbibliotek",
+    "city": "Stockholm"
+  }
+]
