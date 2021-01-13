@@ -1,0 +1,32 @@
+[
+  {
+    "id": "1",
+    "name": "Kwang-Soo Lee",
+    "city": "Stockholm",
+    "startdate": "2021-01-07"
+  },
+  {
+    "id": "2",
+    "name": "Ada Lovelace",
+    "city": "Stockholm",
+    "startdate": "2019-01-01"
+  },
+  {
+    "id": "3",
+    "name": "Glenn Glennsson",
+    "city": "Gothenburg",
+    "startdate": "2020-01-01"
+  },
+  {
+    "id": "4",
+    "name": "Teemu Selanne",
+    "city": "Gothenburg",
+    "startdate": "2020-05-27"
+  },
+  {
+    "id": "5",
+    "name": "Ruth Bader Ginsburg",
+    "city": "Sundsvall",
+    "startdate": "2020-05-27"
+  }
+]
