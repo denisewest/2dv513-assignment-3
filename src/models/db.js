@@ -9,6 +9,8 @@
 
 const mysql = require('mysql')
 const dbConfig = require('../config/db.config.js')
+// const fs = require('fs')
+// const readline = require('readline')
 
 const con = mysql.createConnection({
   host: dbConfig.HOST,
@@ -24,41 +26,25 @@ con.connect((err) => {
     console.log('Something went wrong when trying to connect')
     console.log('error', err)
   } else {
-    console.log('Database successfully connected')
+    console.log('MySql successfully connected')
 
-    const query = createDatabaseAndTables()
+    const query = getInitialDatabaseAndTablesQuery()
 
     con.query(query, (err) => {
       if (err) throw err
-      console.log('Database created')
+      console.log('Database and tables created')
     })
+
+    saveFileData('book', './src/models/data/book.csv')
+    saveFileData('library', './src/models/data/library.csv')
+    saveFileData('member', './src/models/data/member.csv')
+    saveFileData('rating', './src/models/data/rating.csv')
   }
 })
 
-function createDatabaseAndTables () {
+function getInitialDatabaseAndTablesQuery () {
   const query = `
   CREATE DATABASE IF NOT EXISTS ${dbConfig.DB};
-
-  CREATE TABLE IF NOT EXISTS member (
-    id VARCHAR(5) PRIMARY KEY,
-    name VARCHAR(30) NOT NULL,
-    city VARCHAR (25) NOT NULL,
-    startdate DATE NOT NULL
-  );
-
-  CREATE TABLE IF NOT EXISTS library (
-    id VARCHAR(3) PRIMARY KEY,
-    name VARCHAR(30) NOT NULL,
-    city VARCHAR (25) NOT NULL
-  );
-
-  CREATE TABLE IF NOT EXISTS rating (
-    score VARCHAR(4) NOT NULL,
-    review VARCHAR(300) DEFAULT 'No review was written.',
-    isbn VARCHAR(13) NOT NULL,
-    member_id VARCHAR(5) NOT NULL,
-    FOREIGN KEY(member_id) REFERENCES member(id)
-    );
 
   CREATE TABLE IF NOT EXISTS book(
     id VARCHAR(10) PRIMARY KEY,
@@ -76,9 +62,53 @@ function createDatabaseAndTables () {
     FOREIGN KEY(member_id) REFERENCES member(id),
     FOREIGN KEY(library_id) REFERENCES library(id)
     );
+    
+  CREATE TABLE IF NOT EXISTS library (
+    id VARCHAR(3) PRIMARY KEY,
+    name VARCHAR(30) NOT NULL,
+    city VARCHAR (25) NOT NULL
+    );
+
+  CREATE TABLE IF NOT EXISTS member (
+    id VARCHAR(5) PRIMARY KEY,
+    name VARCHAR(30) NOT NULL,
+    city VARCHAR (25) NOT NULL,
+    startdate DATE NOT NULL
+    );
+
+  CREATE TABLE IF NOT EXISTS rating (
+    score VARCHAR(4) NOT NULL,
+    review VARCHAR(300) DEFAULT 'No review was written.',
+    isbn VARCHAR(13) NOT NULL,
+    member_id VARCHAR(5) NOT NULL,
+    FOREIGN KEY(member_id) REFERENCES member(id)
+    );
+
+  SET GLOBAL local_infile=TRUE;
   `
 
   return query
+}
+
+function saveFileData (tableName, filePath) {
+  const sql = `
+  SET FOREIGN_KEY_CHECKS=0;
+
+  LOAD DATA LOCAL INFILE '${filePath}'
+  IGNORE INTO TABLE library.${tableName}
+  COLUMNS TERMINATED BY ','
+  ENCLOSED BY '"'
+  LINES TERMINATED BY '\n'
+  IGNORE 1 LINES;
+  `
+
+  con.query(sql, function (err, result) {
+    if (err) {
+      throw err
+    } else {
+      console.log('Number of records inserted: ' + result.affectedRows)
+    }
+  })
 }
 
 module.exports = con
