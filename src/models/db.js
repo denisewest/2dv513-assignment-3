@@ -106,7 +106,9 @@ function saveFileData (tableName, filePath) {
     if (err) {
       throw err
     } else {
-      console.log('Number of records inserted: ' + result.affectedRows)
+      if (result.affectedRows > 0) {
+        console.log('Number of records inserted: ' + result.affectedRows)
+      }
     }
   })
 }

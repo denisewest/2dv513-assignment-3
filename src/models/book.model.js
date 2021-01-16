@@ -15,10 +15,10 @@ const Book = function (book) {
   this.library_id = book.library_id
 }
 
-Book.findBookByTitle = (title, result) => {
+Book.getBookByTitle = (title, result) => {
   sql.query(
-    // TODO: `SELECT DISTINCT title, author, publishing_year, isbn, description FROM book WHERE title LIKE '%${title}%' ORDER BY publishing_year;`,
-    'SELECT DISTINCT title, author, publishing_year, isbn, description FROM book WHERE title LIKE \'Harry Potter\' ORDER BY publishing_year;',
+    `SELECT DISTINCT title, author, publishing_year, isbn, description FROM book WHERE title LIKE '%${title}%' ORDER BY publishing_year;`,
+
     (err, res) => {
       if (err) {
         console.log('error: ', err)
@@ -28,7 +28,7 @@ Book.findBookByTitle = (title, result) => {
       if (res.affectedRows === 0) {
         result({ kind: 'not_found' }, null)
       }
-      console.log('books found: ', { result })
+      result(null, res)
     }
   )
 }

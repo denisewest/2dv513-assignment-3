@@ -1,8 +1,16 @@
 const Book = require('../models/book.model.js')
 
 exports.findBookByTitle = (req, res) => {
-  Book.findBookByTitle((err, data) => {
+  // check if title params exists
+  if (!req.params.title) {
+    res.status(404)
+    return
+  }
+
+  Book.getBookByTitle(req.params.title, (err, data) => {
     if (err) {
+      console.log(err)
+
       if (err.kind === 'not_found') {
         res.status(404).send({
           message: `Result with search ${req} was not found`
@@ -12,6 +20,9 @@ exports.findBookByTitle = (req, res) => {
           message: err.message || 'Error occurred while trying to retrieve data'
         })
       }
-    } else res.send(data)
+    } else {
+      console.log('tje', data)
+      res.send(data)
+    }
   })
 }
