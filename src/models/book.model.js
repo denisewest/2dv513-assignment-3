@@ -1,3 +1,12 @@
+/**
+ * The model for book schema
+ *
+ * @author Denise Vestman
+ * @version 1.0.0
+ */
+
+'use strict'
+
 const sql = require('./db.js')
 
 const Book = function (book) {
@@ -18,7 +27,6 @@ const Book = function (book) {
 Book.getBookByTitle = (title, result) => {
   sql.query(
     `SELECT DISTINCT title, author, publishing_year, isbn, description FROM book WHERE title LIKE '%${title}%' ORDER BY publishing_year;`,
-
     (err, res) => {
       if (err) {
         console.log('error: ', err)
@@ -28,9 +36,23 @@ Book.getBookByTitle = (title, result) => {
       if (res.affectedRows === 0) {
         result({ kind: 'not_found' }, null)
       }
+      console.log(`book titles with ${title}: `, res)
       result(null, res)
-    }
-  )
+    })
+}
+
+Book.getAverageScorePerBook = result => {
+  sql.query(
+    'SELECT book.title, book.author, book.isbn, AVG(rating.score) AS \'average score\' FROM book INNER JOIN rating ON book.isbn=rating.isbn GROUP BY book.isbn ORDER BY AVG(rating.score) DESC;',
+    (err, res) => {
+      if (err) {
+        console.log('error: ', err)
+        result(null, err)
+        return
+      }
+      console.log('book averages: ', res)
+      result(null, res)
+    })
 }
 
 module.exports = Book
