@@ -8,7 +8,7 @@
 'use strict'
 
 module.exports = app => {
-  const rating = require('../controllers/rating.controller')
+  const library = require('../controllers/library.controller')
 
-  app.get('/rating', rating.findTotalAverageScore)
+  app.get('/library', library.findLibraryByName)
 }

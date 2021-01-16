@@ -8,8 +8,8 @@
 'use strict'
 
 module.exports = app => {
-  const book = require('../controllers/book.controller.js')
+  const book = require('../controllers/book.controller')
 
-  app.get('/books/title/:title', book.findBookByTitle)
+  app.get('/books', book.findBookByTitle)
   app.get('/books/average', book.findAverageScorePerBook)
 }

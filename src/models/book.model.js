@@ -7,7 +7,7 @@
 
 'use strict'
 
-const sql = require('./db.js')
+const sql = require('./db')
 
 const Book = function (book) {
   this.id = book.id
@@ -31,27 +31,26 @@ Book.getBookByTitle = (title, result) => {
       if (err) {
         console.log('error: ', err)
         result(null, err)
-        return
-      }
-      if (res.affectedRows === 0) {
+      } else if (res.affectedRows === 0) {
         result({ kind: 'not_found' }, null)
+      } else {
+        console.log(`book titles with ${title}: `, res)
+        result(null, res)
       }
-      console.log(`book titles with ${title}: `, res)
-      result(null, res)
     })
 }
 
 Book.getAverageScorePerBook = result => {
   sql.query(
-    'SELECT book.title, book.author, book.isbn, AVG(rating.score) AS \'average score\' FROM book INNER JOIN rating ON book.isbn=rating.isbn GROUP BY book.isbn ORDER BY AVG(rating.score) DESC;',
+    'SELECT book.title, book.author, book.isbn, AVG(rating.score) AS \'average_score\' FROM book INNER JOIN rating ON book.isbn=rating.isbn GROUP BY book.isbn ORDER BY AVG(rating.score) DESC;',
     (err, res) => {
       if (err) {
         console.log('error: ', err)
         result(null, err)
-        return
+      } else {
+        console.log('book average score: ', res)
+        result(null, res)
       }
-      console.log('book averages: ', res)
-      result(null, res)
     })
 }
 

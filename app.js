@@ -36,10 +36,10 @@ app.set('views', join(__dirname, 'views'))
 
 const portNumber = 2000
 
-require('./src/routes/book.routes.js')(app)
-require('./src/routes/member.routes.js')(app)
-require('./src/routes/library.routes.js')(app)
-require('./src/routes/rating.routes.js')(app)
+require('./src/routes/book.routes')(app)
+require('./src/routes/member.routes')(app)
+require('./src/routes/library.routes')(app)
+require('./src/routes/rating.routes')(app)
 
 app.listen(portNumber, () => {
   console.log(`Server is running at http://localhost:${portNumber}.`)

@@ -8,7 +8,7 @@
 'use strict'
 
 module.exports = app => {
-  const member = require('../controllers/member.controller.js')
+  const member = require('../controllers/member.controller')
 
   app.get('/member/loan-quantity', member.findNumberOfMemberLoans)
 }

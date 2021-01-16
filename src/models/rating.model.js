@@ -7,7 +7,7 @@
 
 'use strict'
 
-const sql = require('./db.js')
+const sql = require('./db')
 
 const Rating = function (rating) {
   this.score = rating.score
@@ -18,17 +18,17 @@ const Rating = function (rating) {
 
 Rating.getTotalAverageScore = result => {
   sql.query(
-    'SELECT AVG(score) AS \'average score\' FROM rating;',
+    'SELECT AVG(score) AS \'average_score\' FROM rating;',
     (err, res) => {
       if (err) {
         console.log('error: ', err)
         result(null, err)
-      }
-      if (res.affectedRows === 0) {
+      } else if (res.affectedRows === 0) {
         result({ kind: 'not_found' }, null)
+      } else {
+        console.log('total average: ', res)
+        result(null, res)
       }
-      console.log('total average: ', res)
-      result(null, res)
     })
 }
 

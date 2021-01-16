@@ -7,7 +7,7 @@
 
 'use strict'
 
-const sql = require('./db.js')
+const sql = require('./db')
 
 const Member = function (member) {
   this.id = member.id
@@ -17,7 +17,7 @@ const Member = function (member) {
 }
 
 Member.getNumberOfMemberLoans = result => {
-  sql.query('SELECT member.id, member.name, COUNT(book.id) AS \'times borrowed\' FROM book INNER JOIN member ON book.member_id=member.id GROUP BY member.name ORDER BY COUNT(book.id) DESC;',
+  sql.query('SELECT member.id, member.name, COUNT(book.id) AS \'number_of_loans\' FROM book INNER JOIN member ON book.member_id=member.id GROUP BY member.name ORDER BY COUNT(book.id) DESC;',
     (err, res) => {
       if (err) {
         console.log('error: ', err)

@@ -7,16 +7,15 @@
 
 'use strict'
 
-const Book = require('../models/book.model')
+const Library = require('../models/library.model')
 
-exports.findBookByTitle = (req, res) => {
-  // check if title params exists
-  if (!req.query.title) {
+exports.findLibraryByName = (req, res) => {
+  // check if name params exists
+  if (!req.query.name) {
     res.status(404)
-    return
   }
 
-  Book.getBookByTitle(req.query.title, (err, data) => {
+  Library.getLibraryByName(req.query.name, (err, data) => {
     if (err) {
       console.log('error: ', err)
 
@@ -30,18 +29,7 @@ exports.findBookByTitle = (req, res) => {
         })
       }
     } else {
-      console.log('book_data: ', data)
-      res.send(data)
-    }
-  })
-}
-
-exports.findAverageScorePerBook = (req, res) => {
-  Book.getAverageScorePerBook((err, data) => {
-    if (err) {
-      console.log('error: ', err)
-    } else {
-      console.log('book_data: ', data)
+      console.log('library_data: ', data)
       res.send(data)
     }
   })
