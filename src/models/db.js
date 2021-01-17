@@ -16,7 +16,6 @@ const con = mysql.createConnection({
   user: dbConfig.USER,
   password: dbConfig.PASSWORD,
   port: dbConfig.PORT,
-  database: dbConfig.DB,
   multipleStatements: true
 })
 
@@ -27,11 +26,18 @@ con.connect((err) => {
   } else {
     console.log('MySql successfully connected')
 
-    const query = getInitialDatabaseAndTablesQuery()
+    const dbQuery = getDatabaseCreateQuery()
 
-    con.query(query, (err) => {
+    con.query(dbQuery, (err) => {
       if (err) throw err
-      console.log('Database and tables created')
+      console.log('Database created')
+    })
+
+    const tableQuery = getTablesCreateQuery()
+
+    con.query(tableQuery, (err) => {
+      if (err) throw err
+      console.log('Tables created')
     })
 
     saveFileData('book', './src/models/data/book.csv')
@@ -41,10 +47,20 @@ con.connect((err) => {
   }
 })
 
-// Create database and tables
-function getInitialDatabaseAndTablesQuery () {
+// Create database if it doesn't exist
+function getDatabaseCreateQuery () {
   const query = `
   CREATE DATABASE IF NOT EXISTS ${dbConfig.DB};
+  
+  USE ${dbConfig.DB};`
+
+  return query
+}
+
+// Create tables if they don't exist
+function getTablesCreateQuery () {
+  const query = `
+  SET FOREIGN_KEY_CHECKS=0;
 
   CREATE TABLE IF NOT EXISTS book(
     id VARCHAR(10) PRIMARY KEY,
@@ -94,8 +110,6 @@ function getInitialDatabaseAndTablesQuery () {
 // Save file date to database tables
 function saveFileData (tableName, filePath) {
   const sql = `
-  SET FOREIGN_KEY_CHECKS=0;
-
   LOAD DATA LOCAL INFILE '${filePath}'
   IGNORE INTO TABLE library.${tableName}
   COLUMNS TERMINATED BY ','
