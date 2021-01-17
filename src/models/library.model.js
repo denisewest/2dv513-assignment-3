@@ -15,6 +15,7 @@ const Library = function (library) {
   this.city = library.city
 }
 
+// Get all libraries that are availble in the database
 Library.getAllLibraries = (result) => {
   sql.query('SELECT name, city FROM library ORDER BY city;',
     (err, res) => {
@@ -22,12 +23,12 @@ Library.getAllLibraries = (result) => {
         console.log('error: ', err)
         result(null, err)
       } else {
-        console.log('all_libraries: ', res)
         result(null, res)
       }
     })
 }
 
+// Get book(s) by library name
 Library.getLibraryByName = (name, result) => {
   sql.query(`SELECT DISTINCT library.name, library.city, book.title, book.author, book.publishing_year, book.isbn, book.description
 FROM book INNER JOIN library ON book.library_id=library.id WHERE library.name LIKE '%${name}%';`,
@@ -39,7 +40,7 @@ FROM book INNER JOIN library ON book.library_id=library.id WHERE library.name LI
       console.log(`no libraries with name ${name} found`)
       result({ kind: 'not_found' }, null)
     } else {
-      console.log(`libraries with name ${name}: `, res)
+      console.log('res', res)
       result(null, res)
     }
   })

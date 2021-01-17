@@ -16,6 +16,7 @@ const Rating = function (rating) {
   this.member_id = rating.member_id
 }
 
+// Get a list of all ratings made on all library books
 Rating.getAllRatings = result => {
   sql.query('SELECT book.title, book.author, book.isbn, rating.score, rating.review, member.name FROM book, rating, member WHERE book.isbn = rating.isbn AND rating.member_id = member.id GROUP BY rating.id ORDER BY book.title;',
     (err, res) => {
@@ -23,12 +24,12 @@ Rating.getAllRatings = result => {
         console.log('error: ', err)
         result(null, err)
       } else {
-        console.log('all_ratings: ', res)
         result(null, res)
       }
     })
 }
 
+// Get book by average score
 Rating.getBookByAverageScore = (average, result) => {
   sql.query(
     `CREATE OR REPLACE VIEW \`Books average score\` AS
@@ -47,8 +48,7 @@ Rating.getBookByAverageScore = (average, result) => {
         console.log(`no books with average ${average} found.`)
         result({ kind: 'not_found' }, null)
       } else {
-        console.log(`books with ${average}: `, res)
-        result(null, res)
+        result(null, res[1])
       }
     })
 }

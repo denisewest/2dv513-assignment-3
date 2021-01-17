@@ -1,0 +1,90 @@
+<div class='results'>
+  <h1>Search Results</h1>
+  {{#if books_by_author.length}}
+  <ul>
+    {{#each books_by_author}}
+    <li>
+      {{this.author}}<br>
+      {{this.title}}<br>
+      {{this.publishing_year}}<br>
+      {{this.isbn}}<br>
+      "{{this.description}}"<br>
+      {{this.name}}, {{this.city}}
+    </li>
+    {{/each}}
+  </ul>
+  {{/if}}
+
+  {{#if books_by_isbn.length}}
+  <ul>
+    {{#each books_by_isbn}}
+    <li>
+      {{this.isbn}}<br>
+      {{this.title}}<br>
+      {{this.author}}<br>
+      {{this.publishing_year}}<br>
+      "{{this.description}}"<br>
+      {{this.name}}, {{this.city}}
+    </li>
+    {{/each}}
+  </ul>
+  {{/if}}
+
+  {{#if books_by_title.length}}
+  <ul>
+    {{#each books_by_title}}
+    <li>
+      {{this.title}}<br>
+      {{this.author}}<br>
+      {{this.publishing_year}}<br>
+      {{this.isbn}}<br>
+      "{{this.description}}"<br>
+      {{this.name}}, {{this.city}}
+    </li>
+    {{/each}}
+  </ul>
+  {{/if}}
+
+  {{#if books_by_publishing_year.length}}
+  <ul>
+    {{#each books_by_publishing_year}}
+    <li>
+      {{this.publishing_year}}<br>
+      {{this.title}}<br>
+      {{this.author}}<br>
+      {{this.isbn}}<br>
+      "{{this.description}}"<br>
+      {{this.name}}, {{this.city}}
+    </li>
+    {{/each}}
+  </ul>
+  {{/if}}
+
+  {{#if libraries_by_name.length}}
+  <ul>
+    {{#each libraries_by_name}}
+    <li>
+      {{this.name}}, {{this.city}}<br>
+      {{this.title}}<br>
+      {{this.author}}<br>
+      {{this.publishing_year}}<br>
+      {{this.isbn}}<br>
+      "{{this.description}}"
+    </li>
+    {{/each}}
+  </ul>
+  {{/if}}
+
+  {{#if ratings_book_score_average.length}}
+  <ul>
+    {{#each ratings_book_score_average}}
+    <li>
+      {{this.average_score}}<br>
+      {{this.title}}<br>
+      {{this.author}}<br>
+      {{this.isbn}}
+    </li>
+    {{/each}}
+  </ul>
+  {{/if}}
+</div>

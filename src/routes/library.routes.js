@@ -10,6 +10,11 @@
 module.exports = app => {
   const library = require('../controllers/library.controller')
 
-  app.get('/libraries', library.findLibraryByName)
+  app.get('/libraries', (req, res) => {
+    if (req.query.name) {
+      return library.findLibraryByName(req, res)
+    }
+  })
+
   app.get('/libraries/all', library.findAllLibraries)
 }

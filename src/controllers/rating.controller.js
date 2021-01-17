@@ -14,7 +14,6 @@ exports.findAllRatings = (req, res) => {
     if (err) {
       console.log('error: ', err)
     } else {
-      console.log('rating_data: ', data)
       res.render('layouts/ratings', { data })
     }
   })
@@ -22,12 +21,12 @@ exports.findAllRatings = (req, res) => {
 
 exports.findBookByAverageScore = (req, res) => {
   // check if title params exists
-  if (!req.query.average) {
+  if (!req.query.average_score) {
     res.status(404)
     return
   }
 
-  Rating.getBookByAverageScore(req.query.average, (err, data) => {
+  Rating.getBookByAverageScore(req.query.average_score, (err, data) => {
     if (err) {
       console.log('error: ', err)
 
@@ -41,8 +40,7 @@ exports.findBookByAverageScore = (req, res) => {
         })
       }
     } else {
-      console.log('rating_data: ', data)
-      res.send(data)
+      res.render('layouts/results', { ratings_book_score_average: data })
     }
   })
 }

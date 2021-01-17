@@ -1,38 +1,38 @@
 <h1>Welcome</h1>
 <h3>How do you want to find your next book?</h3>
 
-<form method='get'>
+<form method='get' action='/books'>
   <label for='title'>Search book by title</label><br>
-  <input type='text' id='title'>
+  <input type='text' id='title' name='title'>
   <input type='submit' class='submit'><br>
 </form>
 
-<form method='get'>
+<form method='get' action='/books'>
   <label for='author'>Search book by author</label><br>
-  <input type='name' id='author'>
+  <input type='text' id='author' name='author'>
   <input type='submit' class='submit'><br>
 </form>
 
-<form method='get'>
+<form method='get' action='/books'>
   <label for='isbn'>Search book by ISBN</label><br>
-  <input type='text' id='isbn'>
+  <input type='number' id='isbn' name='isbn'>
   <input type='submit' class='submit'><br>
 </form>
 
-<form method='get'>
+<form method='get' action='/books'>
   <label for='publishing_year'>Search book by publishing year</label><br>
-  <input type='text' id='publishing_year'>
+  <input type='number' id='year' name='year'>
   <input type='submit' class='submit'><br>
 </form>
 
-<form method='get'>
-  <label for='library'>Search book by library</label><br>
-  <input type='text' id='library'>
+<form method='get' action='/libraries'>
+  <label for='library'>Search book by library name</label><br>
+  <input type='text' id='library' name='name'>
   <input type='submit' class='submit'><br>
 </form>
 
-<form method='get'>
-  <label for='score'>Search book by rating score</label><br>
-  <input type='text' id='score'>
+<form method='get' action='/ratings'>
+  <label for='average_score'>Search book by rating score</label><br>
+  <input type='number' id='average_score' name='average_score'>
   <input type='submit' class='submit'><br>
 </form>

@@ -18,6 +18,7 @@ const portNumber = 2000
 
 dotenv.config()
 
+// Middlewares
 app.use(helmet())
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({ extended: true }))
@@ -36,11 +37,13 @@ app.get('/', (req, res) => {
   res.render('layouts/home')
 })
 
+// Routes
 require('./src/routes/book.routes')(app)
 require('./src/routes/member.routes')(app)
 require('./src/routes/library.routes')(app)
 require('./src/routes/rating.routes')(app)
 
+// Starting the server
 app.listen(portNumber, () => {
   console.log(`Server is running at http://localhost:${portNumber}.`)
 })

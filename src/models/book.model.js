@@ -24,6 +24,7 @@ const Book = function (book) {
   this.library_id = book.library_id
 }
 
+// Get all books available in the library database
 Book.getAllBooks = (result) => {
   sql.query('SELECT DISTINCT book.title, book.author, book.publishing_year, book.isbn, book.description, book.availability, library.name, library.city FROM book INNER JOIN library ON book.library_id = library.id ORDER BY book.title;',
     (err, res) => {
@@ -31,12 +32,12 @@ Book.getAllBooks = (result) => {
         console.log('error: ', err)
         result(null, err)
       } else {
-        console.log('all_books: ', res)
         result(null, res)
       }
     })
 }
 
+// Get all books that are available for borrowing
 Book.getAvailableBooks = (result) => {
   sql.query('SELECT book.title, book.author, book.publishing_year, book.isbn, book.description, book.availability, library.name, library.city FROM book INNER JOIN library ON book.library_id=library.id WHERE book.availability=1;',
     (err, res) => {
@@ -44,13 +45,12 @@ Book.getAvailableBooks = (result) => {
         console.log('error: ', err)
         result(null, err)
       } else {
-        console.log('all_books: ', res)
         result(null, res)
       }
     })
 }
 
-// TODO: search book by publishing year
+// Search book(s) by publishing year
 Book.getBookByPublishingYear = (year, result) => {
   sql.query(`SELECT book.publishing_year, book.title, book.author, book.isbn, book.description, library.name, library.city
   FROM book
@@ -65,14 +65,15 @@ Book.getBookByPublishingYear = (year, result) => {
       console.log(`no book from year ${year} found.`)
       result({ kind: 'not_found' }, null)
     } else {
-      console.log(`books from year ${year}: `, res)
       result(null, res)
     }
   })
 }
 
+// Get book(s) by ISBN number
 Book.getBookByIsbn = (isbn, result) => {
-  sql.query(`SELECT book.isbn, book.title, book.author, book.publishing_year, book.description, library.name, library.city
+  sql.query(
+  `SELECT book.isbn, book.title, book.author, book.publishing_year, book.description, library.name, library.city
   FROM book
   INNER JOIN library ON book.library_id = library.id
   WHERE book.isbn LIKE '%${isbn}%'
@@ -85,18 +86,19 @@ Book.getBookByIsbn = (isbn, result) => {
       console.log(`no book with isbn ${isbn} found.`)
       result({ kind: 'not_found' }, null)
     } else {
-      console.log(`books with isbn ${isbn}: `, res)
       result(null, res)
     }
   })
 }
 
+// Get book(s) by author
 Book.getBookByAuthor = (author, result) => {
-  sql.query(`SELECT book.title, book.author, book.publishing_year, book.isbn, book.description, library.name, library.city
-FROM book
-INNER JOIN library ON book.library_id = library.id
-WHERE author LIKE '%${author}%'
-ORDER BY book.publishing_year DESC;`,
+  sql.query(
+  `SELECT book.author, book.title, book.publishing_year, book.isbn, book.description, library.name, library.city
+  FROM book
+  INNER JOIN library ON book.library_id = library.id
+  WHERE author LIKE '%${author}%'
+  ORDER BY book.publishing_year DESC;`,
   (err, res) => {
     if (err) {
       console.log('error: ', err)
@@ -105,15 +107,19 @@ ORDER BY book.publishing_year DESC;`,
       console.log(`no book authors with name ${author} found.`)
       result({ kind: 'not_found' }, null)
     } else {
-      console.log(`books with author ${author}: `, res)
       result(null, res)
     }
   })
 }
 
+// Get book(s) by title
 Book.getBookByTitle = (title, result) => {
   sql.query(
-    `SELECT DISTINCT title, author, publishing_year, isbn, description FROM book WHERE title LIKE '%${title}%' ORDER BY publishing_year;`,
+    `SELECT book.title, book.author, book.publishing_year, book.isbn, book.description, library.name, library.city
+    FROM book 
+    INNER JOIN library ON book.library_id = library.id
+    WHERE title LIKE '%${title}%' 
+    ORDER BY publishing_year;`,
     (err, res) => {
       if (err) {
         console.log('error: ', err)
@@ -122,12 +128,12 @@ Book.getBookByTitle = (title, result) => {
         console.log(`no book titles with ${title} found.`)
         result({ kind: 'not_found' }, null)
       } else {
-        console.log(`book titles with ${title}: `, res)
         result(null, res)
       }
     })
 }
 
+// Get average score for each book
 Book.getAverageScorePerBook = result => {
   sql.query(
     'SELECT book.title, book.author, book.isbn, AVG(rating.score) AS \'average_score\' FROM book INNER JOIN rating ON book.isbn=rating.isbn GROUP BY book.isbn ORDER BY AVG(rating.score) DESC;',
@@ -136,7 +142,6 @@ Book.getAverageScorePerBook = result => {
         console.log('error: ', err)
         result(null, err)
       } else {
-        console.log('book_average_score: ', res)
         result(null, res)
       }
     })

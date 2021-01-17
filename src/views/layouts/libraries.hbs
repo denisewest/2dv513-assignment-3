@@ -1,13 +1,14 @@
 <div class='libraries'>
   <h1>Libraries</h1>
+
+  {{#if data.length}}
   <ul>
-    {{#if data.length}}
     {{#each data}}
     <li>
       {{this.name}}<br>
       {{this.city}}
     </li>
     {{/each}}
-    {{/if}}
   </ul>
+  {{/if}}
 </div>

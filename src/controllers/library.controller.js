@@ -14,8 +14,6 @@ exports.findAllLibraries = (req, res) => {
     if (err) {
       console.log('error: ', err)
     } else {
-      console.log('library_data: ', data)
-
       res.render('layouts/libraries', { data })
     }
   })
@@ -41,8 +39,7 @@ exports.findLibraryByName = (req, res) => {
         })
       }
     } else {
-      console.log('library_data: ', data)
-      res.send(data)
+      res.render('layouts/results', { libraries_by_name: data })
     }
   })
 }

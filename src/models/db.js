@@ -9,9 +9,8 @@
 
 const mysql = require('mysql')
 const dbConfig = require('../config/db.config.js')
-// const fs = require('fs')
-// const readline = require('readline')
 
+// Setup MySql database
 const con = mysql.createConnection({
   host: dbConfig.HOST,
   user: dbConfig.USER,
@@ -42,6 +41,7 @@ con.connect((err) => {
   }
 })
 
+// Create database and tables
 function getInitialDatabaseAndTablesQuery () {
   const query = `
   CREATE DATABASE IF NOT EXISTS ${dbConfig.DB};
@@ -91,6 +91,7 @@ function getInitialDatabaseAndTablesQuery () {
   return query
 }
 
+// Save file date to database tables
 function saveFileData (tableName, filePath) {
   const sql = `
   SET FOREIGN_KEY_CHECKS=0;

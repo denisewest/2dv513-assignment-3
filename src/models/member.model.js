@@ -16,7 +16,7 @@ const Member = function (member) {
   this.startdate = member.startdate
 }
 
-// TODO: add search all members
+// Get list of all library members
 Member.getAllMembers = result => {
   sql.query('SELECT DISTINCT * FROM member ORDER BY id;',
     (err, res) => {
@@ -24,12 +24,12 @@ Member.getAllMembers = result => {
         console.log('error: ', err)
         result(null, err)
       } else {
-        console.log('all_members: ', res)
         result(null, res)
       }
     })
 }
 
+// Get info on how many loans each member has had
 Member.getNumberOfMemberLoans = result => {
   sql.query('SELECT member.id, member.name, COUNT(book.id) AS \'number_of_loans\' FROM book INNER JOIN member ON book.member_id=member.id GROUP BY member.name ORDER BY COUNT(book.id) DESC;',
     (err, res) => {
@@ -37,7 +37,6 @@ Member.getNumberOfMemberLoans = result => {
         console.log('error: ', err)
         result(null, err)
       } else {
-        console.log('number_of_loans: ', res)
         result(null, res)
       }
     })

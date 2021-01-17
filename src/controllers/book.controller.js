@@ -51,8 +51,7 @@ exports.findBookByPublishingYear = (req, res) => {
         })
       }
     } else {
-      console.log('book_data: ', data)
-      res.send(data)
+      res.render('layouts/results', { books_by_publishing_year: data })
     }
   })
 }
@@ -77,8 +76,7 @@ exports.findBookByIsbn = (req, res) => {
         })
       }
     } else {
-      console.log('book_data: ', data)
-      res.send(data)
+      res.render('layouts/results', { books_by_isbn: data })
     }
   })
 }
@@ -103,8 +101,7 @@ exports.findBookByAuthor = (req, res) => {
         })
       }
     } else {
-      console.log('book_data: ', data)
-      res.send(data)
+      res.render('layouts/results', { books_by_author: data })
     }
   })
 }
@@ -130,8 +127,7 @@ exports.findBookByTitle = (req, res) => {
         })
       }
     } else {
-      console.log('book_data: ', data)
-      res.send(data)
+      res.render('layouts/results', { books_by_title: data })
     }
   })
 }
@@ -141,7 +137,6 @@ exports.findAverageScorePerBook = (req, res) => {
     if (err) {
       console.log('error: ', err)
     } else {
-      console.log('book_data: ', data)
       res.send(data)
     }
   })
