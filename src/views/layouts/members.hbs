@@ -4,9 +4,11 @@
     {{#if data.length}}
     {{#each data}}
     <li>
-      {{this.id}}, {{this.name}}<br>
+      <div class='first_result'>
+        ID {{this.id}}, {{this.name}}
+      </div>
       {{this.city}}<br>
-      {{this.startdate}}
+      Member since {{this.startdate}}
     </li>
     {{/each}}
     {{/if}}

@@ -4,10 +4,12 @@
   <ul>
     {{#each books_by_author}}
     <li>
-      {{this.author}}<br>
+      <div class='first_result'>
+        {{this.author}}
+      </div>
       {{this.title}}<br>
-      {{this.publishing_year}}<br>
-      {{this.isbn}}<br>
+      Published {{this.publishing_year}}<br>
+      ISBN {{this.isbn}}<br>
       "{{this.description}}"<br>
       {{this.name}}, {{this.city}}
     </li>
@@ -19,10 +21,12 @@
   <ul>
     {{#each books_by_isbn}}
     <li>
-      {{this.isbn}}<br>
+      <div class='first_result'>
+        ISBN {{this.isbn}}
+      </div>
       {{this.title}}<br>
       {{this.author}}<br>
-      {{this.publishing_year}}<br>
+      Published {{this.publishing_year}}<br>
       "{{this.description}}"<br>
       {{this.name}}, {{this.city}}
     </li>
@@ -34,10 +38,12 @@
   <ul>
     {{#each books_by_title}}
     <li>
-      {{this.title}}<br>
+      <div class='first_result'>
+        {{this.title}}
+      </div>
       {{this.author}}<br>
-      {{this.publishing_year}}<br>
-      {{this.isbn}}<br>
+      Published {{this.publishing_year}}<br>
+      ISBN {{this.isbn}}<br>
       "{{this.description}}"<br>
       {{this.name}}, {{this.city}}
     </li>
@@ -49,10 +55,12 @@
   <ul>
     {{#each books_by_publishing_year}}
     <li>
-      {{this.publishing_year}}<br>
+      <div class='first_result'>
+        Published {{this.publishing_year}}
+      </div>
       {{this.title}}<br>
       {{this.author}}<br>
-      {{this.isbn}}<br>
+      ISBN {{this.isbn}}<br>
       "{{this.description}}"<br>
       {{this.name}}, {{this.city}}
     </li>
@@ -64,11 +72,13 @@
   <ul>
     {{#each libraries_by_name}}
     <li>
-      {{this.name}}, {{this.city}}<br>
+      <div class='first_result'>
+        {{this.name}}, {{this.city}}
+      </div>
       {{this.title}}<br>
       {{this.author}}<br>
-      {{this.publishing_year}}<br>
-      {{this.isbn}}<br>
+      Published {{this.publishing_year}}<br>
+      ISBN {{this.isbn}}<br>
       "{{this.description}}"
     </li>
     {{/each}}
@@ -79,10 +89,12 @@
   <ul>
     {{#each ratings_book_score_average}}
     <li>
-      {{this.average_score}}<br>
+      <div class='first_result'>
+        Average score {{this.average_score}}
+      </div>
       {{this.title}}<br>
       {{this.author}}<br>
-      {{this.isbn}}
+      ISBN {{this.isbn}}
     </li>
     {{/each}}
   </ul>

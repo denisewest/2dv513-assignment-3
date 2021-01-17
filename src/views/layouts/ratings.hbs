@@ -4,10 +4,12 @@
     {{#if data.length}}
     {{#each data}}
     <li>
+      <div class='first_result'>
+        Score {{this.score}}<br>
+      </div>
       {{this.title}}<br>
       {{this.author}}<br>
-      {{this.isbn}}<br>
-      {{this.score}}<br>
+      ISBN {{this.isbn}}<br>
       "{{this.review}}"<br>
       - {{this.name}}
     </li>

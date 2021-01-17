@@ -20,6 +20,10 @@ h3 {
   margin-bottom: 15px;
 }
 
+.first_result {
+  font-weight: bold;
+}
+
 .footer {
   position: fixed;
   margin-top: 15px;
