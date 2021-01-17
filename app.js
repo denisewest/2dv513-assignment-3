@@ -7,34 +7,34 @@
 
 'use strict'
 
-// const hbs = require('express-hbs')
 const express = require('express')
+const hbs = require('express-handlebars')
 const helmet = require('helmet')
 const bodyparser = require('body-parser')
 const app = express()
 const dotenv = require('dotenv')
-// const { join } = require('path')
+const { join } = require('path')
+const portNumber = 2000
 
 dotenv.config()
 
 app.use(helmet())
 app.use(bodyparser.json())
 app.use(bodyparser.urlencoded({ extended: true }))
+app.use(express.static('./src/public'))
+
+app.set('views', join(__dirname, './src/views'))
+app.set('view engine', 'hbs')
+app.engine('hbs', hbs({
+  layoutsDir: './src/views/layouts',
+  partialsDir: './src/views/partials',
+  extname: 'hbs',
+  defaultLayout: 'main'
+}))
 
 app.get('/', (req, res) => {
-  res.json({ message: 'Welcome to this library application.' })
+  res.render('home')
 })
-
-/*
-app.engine('hbs', hbs.express4({
-  defaultLayout: join(__dirname, 'views', 'layouts', 'default'),
-  partialsDir: join(__dirname, 'views', 'partials')
-}))
-app.set('view engine', 'hbs')
-app.set('views', join(__dirname, 'views'))
-*/
-
-const portNumber = 2000
 
 require('./src/routes/book.routes')(app)
 require('./src/routes/member.routes')(app)

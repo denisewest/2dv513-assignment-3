@@ -1,9 +1,13 @@
 body {
   font-family: 'Open Sans', sans-serif;
-  font-size: 12;
+  font-size: 12px;
+}
+
+header h1 {
+  font-size: 60px;
 }
 
 h1 {
   font-family: 'Pacifico', cursive;
-  font-size: 40;
+  font-size: 40px;
 }

@@ -23,6 +23,7 @@ FROM book INNER JOIN library ON book.library_id=library.id WHERE library.name LI
       console.log('error: ', err)
       result(null, err)
     } else if (res.affectedRows === 0) {
+      console.log(`no libraries with name ${name} found`)
       result({ kind: 'not_found' }, null)
     } else {
       console.log(`libraries with name ${name}: `, res)

@@ -32,6 +32,7 @@ Book.getBookByTitle = (title, result) => {
         console.log('error: ', err)
         result(null, err)
       } else if (res.affectedRows === 0) {
+        console.log(`no book titles with ${title} found.`)
         result({ kind: 'not_found' }, null)
       } else {
         console.log(`book titles with ${title}: `, res)
