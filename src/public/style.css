@@ -12,6 +12,10 @@ h1 {
   font-size: 40px;
 }
 
+h3 {
+  font-size: 15px;
+}
+
 #start-button {
   margin-bottom: 15px;
 }
@@ -24,4 +28,8 @@ h1 {
 
 form {
   margin-bottom: 15px;
+}
+
+a {
+  text-decoration: none;
 }

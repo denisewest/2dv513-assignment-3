@@ -10,5 +10,6 @@
 module.exports = app => {
   const member = require('../controllers/member.controller')
 
-  app.get('/member/loan-quantity', member.findNumberOfMemberLoans)
+  app.get('/members/all', member.findAllMembers)
+  app.get('/members/loan-quantity', member.findNumberOfMemberLoans)
 }

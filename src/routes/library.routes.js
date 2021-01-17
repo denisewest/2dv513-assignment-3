@@ -10,5 +10,6 @@
 module.exports = app => {
   const library = require('../controllers/library.controller')
 
-  app.get('/library', library.findLibraryByName)
+  app.get('/libraries', library.findLibraryByName)
+  app.get('/libraries/all', library.findAllLibraries)
 }

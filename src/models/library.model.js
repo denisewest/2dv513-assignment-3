@@ -15,6 +15,19 @@ const Library = function (library) {
   this.city = library.city
 }
 
+Library.getAllLibraries = (result) => {
+  sql.query('SELECT name, city FROM library ORDER BY city;',
+    (err, res) => {
+      if (err) {
+        console.log('error: ', err)
+        result(null, err)
+      } else {
+        console.log('all_libraries: ', res)
+        result(null, res)
+      }
+    })
+}
+
 Library.getLibraryByName = (name, result) => {
   sql.query(`SELECT DISTINCT library.name, library.city, book.title, book.author, book.publishing_year, book.isbn, book.description
 FROM book INNER JOIN library ON book.library_id=library.id WHERE library.name LIKE '%${name}%';`,

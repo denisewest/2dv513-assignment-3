@@ -9,6 +9,17 @@
 
 const Library = require('../models/library.model')
 
+exports.findAllLibraries = (req, res) => {
+  Library.getAllLibraries((err, data) => {
+    if (err) {
+      console.log('error: ', err)
+    } else {
+      console.log('library_data: ', data)
+      res.send(data)
+    }
+  })
+}
+
 exports.findLibraryByName = (req, res) => {
   // check if name params exists
   if (!req.query.name) {

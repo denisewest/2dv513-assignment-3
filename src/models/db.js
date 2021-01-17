@@ -77,6 +77,7 @@ function getInitialDatabaseAndTablesQuery () {
     );
 
   CREATE TABLE IF NOT EXISTS rating (
+    id VARCHAR(5) PRIMARY KEY,
     score VARCHAR(4) NOT NULL,
     review VARCHAR(300) DEFAULT 'No review was written.',
     isbn VARCHAR(13) NOT NULL,

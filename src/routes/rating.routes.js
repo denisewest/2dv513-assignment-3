@@ -10,5 +10,6 @@
 module.exports = app => {
   const rating = require('../controllers/rating.controller')
 
-  app.get('/rating', rating.findTotalAverageScore)
+  app.get('/ratings/all', rating.findAllRatings)
+  app.get('/ratings', rating.findBookByAverageScore)
 }
