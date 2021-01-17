@@ -11,3 +11,17 @@ h1 {
   font-family: 'Pacifico', cursive;
   font-size: 40px;
 }
+
+#start-button {
+  margin-bottom: 15px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+form {
+  margin-bottom: 15px;
+}
