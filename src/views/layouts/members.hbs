@@ -1,0 +1,14 @@
+<div class='members'>
+  <h1>Members</h1>
+  <ul>
+    {{#if data.length}}
+    {{#each data}}
+    <li>
+      {{this.id}}, {{this.name}}<br>
+      {{this.city}}<br>
+      {{this.startdate}}
+    </li>
+    {{/each}}
+    {{/if}}
+  </ul>
+</div>

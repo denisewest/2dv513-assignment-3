@@ -15,7 +15,7 @@ exports.findAllMembers = (req, res) => {
       console.log('error: ', err)
     } else {
       console.log('member_data: ', data)
-      res.send(data)
+      res.render('layouts/members', { data })
     }
   })
 }

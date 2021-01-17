@@ -15,7 +15,7 @@ exports.findAllBooks = (req, res) => {
       console.log('error: ', err)
     } else {
       console.log('book_data: ', data)
-      res.send(data)
+      res.render('layouts/books', { data })
     }
   })
 }
@@ -26,7 +26,7 @@ exports.findAvailableBooks = (req, res) => {
       console.log('error: ', err)
     } else {
       console.log('book_data: ', data)
-      res.send(data)
+      res.render('layouts/books', { data })
     }
   })
 }

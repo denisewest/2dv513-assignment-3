@@ -1,0 +1,22 @@
+<div class='books'>
+  <h1>Books</h1>
+  <ul>
+    {{#if data.length}}
+    {{#each data}}
+    <li>
+      {{this.title}}<br>
+      {{this.author}}<br>
+      {{this.publishing_year}}<br>
+      {{this.isbn}}<br>
+      "{{this.description}}"<br>
+      {{#if this.availability}}
+      - Available -
+      {{else}}
+      - Unavailable -
+      {{/if}}<br>
+      {{this.name}}, {{this.city}}
+    </li>
+    {{/each}}
+    {{/if}}
+  </ul>
+</div>

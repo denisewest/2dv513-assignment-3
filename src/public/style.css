@@ -1,6 +1,6 @@
 body {
   font-family: 'Open Sans', sans-serif;
-  font-size: 12px;
+  font-size: 15px;
 }
 
 header h1 {
@@ -22,6 +22,7 @@ h3 {
 
 .footer {
   position: fixed;
+  margin-top: 15px;
   bottom: 0;
   width: 100%;
 }
@@ -32,4 +33,8 @@ form {
 
 a {
   text-decoration: none;
+}
+
+ul li {
+  margin-bottom: 20px;
 }

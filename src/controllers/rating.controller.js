@@ -15,7 +15,7 @@ exports.findAllRatings = (req, res) => {
       console.log('error: ', err)
     } else {
       console.log('rating_data: ', data)
-      res.send(data)
+      res.render('layouts/ratings', { data })
     }
   })
 }

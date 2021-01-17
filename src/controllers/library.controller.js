@@ -15,7 +15,8 @@ exports.findAllLibraries = (req, res) => {
       console.log('error: ', err)
     } else {
       console.log('library_data: ', data)
-      res.send(data)
+
+      res.render('layouts/libraries', { data })
     }
   })
 }

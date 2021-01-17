@@ -1,0 +1,13 @@
+<div class='libraries'>
+  <h1>Libraries</h1>
+  <ul>
+    {{#if data.length}}
+    {{#each data}}
+    <li>
+      {{this.name}}<br>
+      {{this.city}}
+    </li>
+    {{/each}}
+    {{/if}}
+  </ul>
+</div>

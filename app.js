@@ -29,11 +29,11 @@ app.engine('hbs', hbs({
   layoutsDir: './src/views/layouts',
   partialsDir: './src/views/partials',
   extname: 'hbs',
-  defaultLayout: 'main'
+  defaultLayout: '../main'
 }))
 
 app.get('/', (req, res) => {
-  res.render('home')
+  res.render('layouts/home')
 })
 
 require('./src/routes/book.routes')(app)

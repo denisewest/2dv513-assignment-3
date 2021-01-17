@@ -25,7 +25,7 @@ const Book = function (book) {
 }
 
 Book.getAllBooks = (result) => {
-  sql.query('SELECT DISTINCT book.title, book.author, book.publishing_year, book.isbn, book.description, library.name, library.city FROM book INNER JOIN library ON book.library_id = library.id ORDER BY book.title;',
+  sql.query('SELECT DISTINCT book.title, book.author, book.publishing_year, book.isbn, book.description, book.availability, library.name, library.city FROM book INNER JOIN library ON book.library_id = library.id ORDER BY book.title;',
     (err, res) => {
       if (err) {
         console.log('error: ', err)
@@ -38,7 +38,7 @@ Book.getAllBooks = (result) => {
 }
 
 Book.getAvailableBooks = (result) => {
-  sql.query('SELECT book.title, book.author, book.publishing_year, book.isbn, book.description, library.name, library.city FROM book INNER JOIN library ON book.library_id=library.id WHERE book.availability=1;',
+  sql.query('SELECT book.title, book.author, book.publishing_year, book.isbn, book.description, book.availability, library.name, library.city FROM book INNER JOIN library ON book.library_id=library.id WHERE book.availability=1;',
     (err, res) => {
       if (err) {
         console.log('error: ', err)
